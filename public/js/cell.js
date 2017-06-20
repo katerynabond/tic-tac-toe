@@ -10,6 +10,7 @@ Cell.prototype.toHtml = function(){
   div.style.display = 'inline-block';
   div.style.width  = `${this.width}px`;
   div.style.border = '0.25px solid black';
-  div.appendChild(document.createTextNode(this.type || '\u00A0'));
+  div.appendChild(document.createTextNode(this.type || ''));
+  div.style.verticalAlign = "top";
   return div;
 };
