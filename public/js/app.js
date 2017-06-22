@@ -4,8 +4,8 @@ const App = {
   selectedType: 'X',
   numRows: 3,
   numCols: 3,
-  cellWidth: 25,
-  cellHeight: 25,
+  cellWidth: 100,
+  cellHeight: 100,
   grid: [],
   start: function(){
     this.cacheDOM();
@@ -57,8 +57,49 @@ const App = {
   changeType: function(rowIndex, colIndex){
     const cell = this.grid[rowIndex][colIndex];
     cell.type = this.selectedType;
-    console.log(cell.selectedCellType);
+    this.checkRowsWinner();
+    this.checkColsWinner();
+    this.checkDiagonalWinner();
     this.render();
+  },
+
+  // Loop through rows and see if any are winners.
+
+  checkRowsWinner: function() {
+    for(let rowIndex = 0; rowIndex < this.numRows; rowIndex+=1){
+      if (this.grid[rowIndex][0].type === this.grid[rowIndex][1].type && this.grid[rowIndex][0].type === this.grid[rowIndex][2].type)
+      {
+        // const cell = this.grid[rowIndex][0];
+        // cell.color = '#9AA4AF';
+        console.log('Winner rows!');
+        return true;
+      }
+      return false;
+    }
+  },
+
+  checkColsWinner: function(){
+    for(let colIndex = 0; colIndex < this.numCols; colIndex+=1){
+      if (this.grid[0][colIndex].type === this.grid[1][colIndex].type && this.grid[0][colIndex].type === this.grid[2][colIndex].type)
+      {
+        console.log('Winner columns!');
+        return true;
+      }
+      return false;
+    }
+  },
+
+  checkDiagonalWinner: function(){
+    for(let rowIndex = 0; rowIndex < this.numRows; rowIndex+=1){
+      for(let colIndex = 0; colIndex < this.numCols; colIndex+=1){
+        if (this.grid[0][0].type === this.grid[1][1].type && this.grid[0][0].type === this.grid[2][2].type)
+        {
+          console.log('Winner diagonal!');
+          return true;
+        }
+        return false;
+      }
+    }
   },
 
   render: function(){

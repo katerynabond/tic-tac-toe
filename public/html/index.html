@@ -5,18 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Tic-Tac-Toe</title>
+  <link href="css/normalize.css" media="all" rel="stylesheet" />
   <link rel="stylesheet" href="css/main.css">
+  <link href="https://fonts.googleapis.com/css?family=Eczar:500,700|Open+Sans" rel="stylesheet">
+  <link href="assets/stylesheets/grid.css" media="all" rel="stylesheet" />
+
 </head>
 <body>
   <div id="app">
-    <section class="controls">
-      <button class="tic-tac-toe-X">X</button>
-      <button class="tic-tac-toe-O">O</button>
-      <button class="reset">Reset</button>
-    </section>
-    <section class="grid-output"></section>
-  </div>
 
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+
+          <section class="grid-output"></section>
+
+        </div>
+        <div class="col-md-6">
+
+            <section class="controls">
+              <button class="tic-tac-toe-X X-button-view">X</button>
+              <button class="tic-tac-toe-O O-button-view">O</button>
+              <button class="reset">Reset</button>
+            </section>
+
+        </div>
+      </div>
+    </div>
+  </div>
 
 
 
