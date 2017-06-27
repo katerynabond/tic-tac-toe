@@ -2,6 +2,7 @@
 const App = {
   rootElement: '#app',
   selectedType: 'X',
+  winnerColor: 'white',
   numRows: 3,
   numCols: 3,
   cellWidth: 100,
@@ -59,48 +60,55 @@ const App = {
     cell.type = this.selectedType;
     this.checkRowsWinner();
     this.checkColsWinner();
-    this.checkDiagonalWinner();
+    this.checkMainDiagonalWinner();
+  //  this.checkDiagonalWinner();
     this.render();
   },
 
-  // Loop through rows and see if any are winners.
-
   checkRowsWinner: function() {
     for(let rowIndex = 0; rowIndex < this.numRows; rowIndex+=1){
-      if (this.grid[rowIndex][0].type === this.grid[rowIndex][1].type && this.grid[rowIndex][0].type === this.grid[rowIndex][2].type)
+      if (this.grid[rowIndex][0].type && this.grid[rowIndex][0].type === this.grid[rowIndex][1].type && this.grid[rowIndex][0].type === this.grid[rowIndex][2].type)
       {
-        // const cell = this.grid[rowIndex][0];
-        // cell.color = '#9AA4AF';
+        this.grid[rowIndex][0].setWinnerColor('#9AA4AF');
+        this.grid[rowIndex][1].setWinnerColor('#9AA4AF');
+        this.grid[rowIndex][2].setWinnerColor('#9AA4AF');
         console.log('Winner rows!');
         return true;
       }
-      return false;
     }
+    return false;
   },
 
   checkColsWinner: function(){
     for(let colIndex = 0; colIndex < this.numCols; colIndex+=1){
-      if (this.grid[0][colIndex].type === this.grid[1][colIndex].type && this.grid[0][colIndex].type === this.grid[2][colIndex].type)
+      if (this.grid[0][colIndex].type && this.grid[0][colIndex].type === this.grid[1][colIndex].type && this.grid[0][colIndex].type === this.grid[2][colIndex].type)
       {
+        this.grid[0][colIndex].setWinnerColor('#9AA4AF');
+        this.grid[1][colIndex].setWinnerColor('#9AA4AF');
+        this.grid[2][colIndex].setWinnerColor('#9AA4AF');
         console.log('Winner columns!');
         return true;
+      }
+    }
+        return false;
+  },
+
+  checkMainDiagonalWinner: function(){
+    for(let rowIndex = 0; rowIndex < this.numRows; rowIndex+=1){
+      for(let colIndex = 0; colIndex < this.numCols; colIndex+=1){
+        if (this.grid[0][0].type && this.grid[0][0].type === this.grid[1][1].type && this.grid[0][0].type === this.grid[2][2].type)
+        {
+          this.grid[0][0].setWinnerColor('#9AA4AF');
+          this.grid[1][1].setWinnerColor('#9AA4AF');
+          this.grid[2][2].setWinnerColor('#9AA4AF');
+          console.log('Winner diagonal!');
+          return true;
+        }
       }
       return false;
     }
   },
 
-  checkDiagonalWinner: function(){
-    for(let rowIndex = 0; rowIndex < this.numRows; rowIndex+=1){
-      for(let colIndex = 0; colIndex < this.numCols; colIndex+=1){
-        if (this.grid[0][0].type === this.grid[1][1].type && this.grid[0][0].type === this.grid[2][2].type)
-        {
-          console.log('Winner diagonal!');
-          return true;
-        }
-        return false;
-      }
-    }
-  },
 
   render: function(){
     this.gridOutput.innerHTML = '';

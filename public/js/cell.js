@@ -1,3 +1,4 @@
+/*jshint esversion: 6*/
 function Cell(width, height, type){
   this.width = width || 75;
   this.height = height || 75;
@@ -11,7 +12,12 @@ Cell.prototype.toHtml = function(){
   div.style.display = 'inline-block';
   div.style.width  = `${this.width}px`;
   div.style.border = '0.25px solid #9AA4AF';
+  div.style.backgroundColor = this.color;
   div.appendChild(document.createTextNode(this.type || ''));
   div.style.verticalAlign = "top";
   return div;
+};
+
+Cell.prototype.setWinnerColor = function(winnerColor){
+    this.color = winnerColor;
 };
